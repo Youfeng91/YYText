@@ -1291,7 +1291,11 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     if (_allowsCopyAttributedString) {
         NSAttributedString *text = [_innerText attributedSubstringFromRange:_selectedTextRange.asRange];
         if (text.length) {
-            [UIPasteboard generalPasteboard].yy_AttributedString = text;
+            if([self.delegate respondsToSelector:@selector(textView:copySelectedAttTextToPasteboard:)]) {
+                [self.delegate textView:self copySelectedAttTextToPasteboard:text];
+            } else {
+                [UIPasteboard generalPasteboard].yy_AttributedString = text;
+            }
         }
     } else {
         NSString *string = [_innerText yy_plainTextForRange:_selectedTextRange.asRange];
