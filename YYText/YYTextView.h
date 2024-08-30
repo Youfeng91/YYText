@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)textView:(YYTextView *)textView didTapHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect;
 - (BOOL)textView:(YYTextView *)textView shouldLongPressHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange;
 - (void)textView:(YYTextView *)textView didLongPressHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect;
+///yytextview 内容为NSAttributedString时复制内容到剪切板拦截，自定义复制到剪切板内容
+- (void)textView:(YYTextView *)textView copySelectedAttTextToPasteboard:(NSAttributedString *)text;
 
 @end
 
