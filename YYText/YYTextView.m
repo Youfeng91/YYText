@@ -1270,6 +1270,15 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 /// Returns whether the text view can paste data from pastboard.
 - (BOOL)_isPasteboardContainsValidValue {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    if (@available(iOS 10.0, *)) {
+        if (pasteboard.hasStrings) {
+            return YES;
+        }
+        if (_allowsPasteImage && pasteboard.hasImages) {
+            return YES;
+        }
+        return NO;
+    }
     if (pasteboard.string.length > 0) {
         return YES;
     }
